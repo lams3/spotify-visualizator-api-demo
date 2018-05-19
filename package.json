@@ -1,0 +1,27 @@
+{
+  "name": "spotify-visualizator-api-demo",
+  "version": "1.0.0",
+  "description": "A simple server using Spotify Web API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lams3/spotify-visualizator-api-demo.git"
+  },
+  "keywords": [
+    "spotify"
+  ],
+  "author": "lams3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lams3/spotify-visualizator-api-demo/issues"
+  },
+  "homepage": "https://github.com/lams3/spotify-visualizator-api-demo#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "spotify-web-api-node": "^3.1.1"
+  }
+}
