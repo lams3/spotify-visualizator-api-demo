@@ -27,16 +27,29 @@ app.get('/login', (req, res, next) => {
 
 app.get('/code', (req, res, next) => {
     spotify.authorizationCodeGrant(req.query.code)
-        .then(data => res.redirect(`${front}?code=${data.body['access_token']}`))
+        .then(data => res.redirect(`${front}?code=${data.body['access_token']}`));
 });
 
 app.get('/transfer/:code/:id', async (req, res, next) => {
-    console.log(req.params.code, req.params.id);
     spotify.setAccessToken(req.params.code);
     spotify.transferMyPlayback({
         deviceIds: [req.params.id],
         play: true
     }).then(response => res.json(response));
+});
+
+app.get('/track/:code/:id', async (req, res, next) => {
+    const response = {
+        features: null,
+        analysis: null
+    };
+    spotify.setAccessToken(req.params.code);
+    spotify.getAudioFeaturesForTrack(req.params.id)
+        .then(features => {
+            response.features = features;
+            return spotify.getAudioAnalysisForTrack(req.params.id);
+        }).then(analysis => response.analysis = analysis)
+        .then(() => res.json(response));
 });
 
 app.listen(8080, () => {
